@@ -1,5 +1,8 @@
 <?php
 
+  // include config
+  include("/home/d/config.inc.php");
+
   $path = ltrim($_SERVER['REQUEST_URI'], '/');    // Trim leading slash(es)
   $elements = explode('/', $path);                // Split path on slashes
   if(empty($elements[0]) && sizeof(array_keys($_POST)) == 0) {                       // No path elements means home

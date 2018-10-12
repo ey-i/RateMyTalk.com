@@ -20,7 +20,7 @@
 
   // create new DB entry
 
-  $db = new mysqli("localhost", "", "", "ratemytalk");
+  $db = new mysqli("localhost", $db_user, $db_pass, "ratemytalk");
   if ($db->connect_error) {
     die("DB error (1).");
   }
@@ -31,14 +31,11 @@
 
   while($golden === FALSE) {
 
-    //$new_id = "E4SZSM";
-
     // check if the ID is already taken
-    $sql = "SELECT id FROM talk WHERE id=$new_id LIMIT 1";
-    $sql = mysql_query($sql);
-    if (mysql_num_rows($sql) != 0) {
-      // this ID is taken!
-      die("ID taken!");
+    $sql = "SELECT id FROM talk WHERE id='$new_id' LIMIT 1";
+    $sql = $db->query($sql);
+    if ($sql->num_rows != 0) {
+      $new_id = getToken(6);
       continue; // to select a new ID
     }
 
@@ -62,7 +59,9 @@
   $sql->close();
   $db->close();
 
-  echo "WE ARE GOLDEN $new_id";
-
+  // we are golden!!
+  include("includes/header.php");
+  include("content/allset.php");
+  include("includes/footer.php");
 
 ?>
