@@ -1,8 +1,5 @@
 <?php
 
-  // include config
-  require "/home/d/config.inc.php";
-
   require "library/HTMLPurifier.path.php";
   require "HTMLPurifier.includes.php";
   require "includes/util.php";
@@ -23,7 +20,7 @@
 
   // create new DB entry
 
-  $db = new mysqli("localhost", $db_user, $db_pass, "ratemytalk");
+  $db = new mysqli("localhost", $db_user, $db_password, "ratemytalk");
   if ($db->connect_error) {
     die("DB error (1).");
   }
