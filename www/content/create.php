@@ -19,32 +19,50 @@
   }
 
   // create new DB entry
-  $new_id = getToken(6);
-
-  $new_id = "E4SZSM";
 
   $db = new mysqli("localhost", "", "", "ratemytalk");
   if ($db->connect_error) {
     die("DB error (1).");
   }
 
-  $sql = "INSERT INTO talk (id, email, title) VALUES (?,?,?)";
-  $sql = $db->prepare($sql);
-  $sql->bind_param("sss", $new_id, $email, $title);
-  $status = $sql->execute();
+  $new_id = getToken(6);
 
-  if ($status) {
-    echo "OK";
-  } else {
-    die("DB error (2).");
+  $golden = FALSE;
+
+  while($golden === FALSE) {
+
+    //$new_id = "E4SZSM";
+
+    // check if the ID is already taken
+    $sql = "SELECT id FROM talk WHERE id=$new_id LIMIT 1";
+    $sql = mysql_query($sql);
+    if (mysql_num_rows($sql) != 0) {
+      // this ID is taken!
+      die("ID taken!");
+      continue; // to select a new ID
+    }
+
+    // ID should be free
+    $sql = "INSERT INTO talk (id, email, title) VALUES (?,?,?)";
+    $sql = $db->prepare($sql);
+    $sql->bind_param("sss", $new_id, $email, $title);
+    $status = $sql->execute();
+
+    if ($status === TRUE) {
+
+      // we are golden
+      $golden = TRUE;
+
+    } else {
+      die("DB error (2).");
+    }
+
   }
-
-  echo $new_id;
 
   $sql->close();
   $db->close();
 
-  // show DB entry
+  echo "WE ARE GOLDEN $new_id";
 
 
 ?>
