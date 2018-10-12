@@ -1,5 +1,8 @@
 <?php
 
+  // include config
+  require "/home/d/config.inc.php";
+
   require "library/HTMLPurifier.path.php";
   require "HTMLPurifier.includes.php";
   require "includes/util.php";
