@@ -1,18 +1,22 @@
 <?php
 
-  $what = "welcome";
-
-  print_r();
-
-  if (isset($_REQUEST["what"])) {
-    $what = $_REQUEST["what"];
+  $path = ltrim($_SERVER['REQUEST_URI'], '/');    // Trim leading slash(es)
+  $elements = explode('/', $path);                // Split path on slashes
+  if(empty($elements[0]) && sizeof(array_keys($_POST)) == 0) {                       // No path elements means home
+    $what = "welcome";
   } else {
-    // this could be a requested rating page
-    $get_keys = array_keys($_GET);
-    if (sizeof($get_keys) == 1) {
-      $requested_id = $get_keys[0];
-      $what = "rate";
+  
+    if (isset($_REQUEST["what"])) {
+      $what = $_REQUEST["what"];
+    } else {
+  
+      // this could be a requested rating page
+      if (sizeof($elements) == 1) {
+        $requested_id = $elements[0];
+        $what = "rate";
+      }
     }
+
   }
 
   if ($what == "create") {

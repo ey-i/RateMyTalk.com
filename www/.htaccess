@@ -1,0 +1,6 @@
+RewriteEngine On
+
+#RewriteRule ^(.*)$ /index.php?a=$1 
+FallbackResource /index.php
+
+
