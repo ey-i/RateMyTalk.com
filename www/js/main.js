@@ -27,8 +27,12 @@ function rate(what, how) {
   } else {
     score = -10; // bad
   }
-  
+
   document.getElementById(what+'_score').value = score;
+
+  if (SLIDES != null && SPEAKER != null) {
+    document.getElementById('geiler_button').disabled = "false";
+  }
 
 };
 

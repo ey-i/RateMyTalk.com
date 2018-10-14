@@ -60,7 +60,7 @@
     <!-- without javascript we only give bad ratings hahahaha -->
     <input id="slides_score" type="hidden" name="slides_score" value="-10">
     <input id="speaker_score" type="hidden" name="speaker_score" value="-10">
-    <input type="submit" class="btn" style="float:right" value="Submit Rating!">
+    <input id="geiler_button" type="submit" class="btn" style="float:right" value="Submit Rating!" disabled="true">
   </form>
   <br><br>
   <span class="muchsmaller" style="float:left"><a href="<?php echo $id; ?>/results">Skip to the results..</a></span>
